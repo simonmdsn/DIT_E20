@@ -208,3 +208,5 @@ Exercise: VS Code and HTML
 - Save the HTML file in this directory so that the nginx web server serves it.
 
 - Check that you can view your page from your browser
+
+The files `00-test.html`, `01-form.html` and `02-form-post.html` all fulfill the elements from the slides.
