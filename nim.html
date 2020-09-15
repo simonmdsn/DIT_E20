@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+    </script>
+    <script>
+        class Data {
+            constructor() {
+                this.stickcount = 20;
+                this.visualize();
+            }
+            visualize(n) {
+                let $visual = $("#visualization");
+                let stars = "";
+                for (let i = 0; i < this.stickcount; i++) {
+                    if (i % 10 == 0) {
+                        stars += ".";
+                    } else stars += "*";
+                }
+                $visual.text("stickcount is " + this.stickcount)
+                    .append("<p>" + stars + "</p>");
+                if (n != undefined) {
+                    $visual.append(n);
+                }
+            }
+            add(n) {
+                this.stickcount += n;
+                let computer = Math.random() < 0.5 ? -3 : -2;
+                let win = this.gameover();
+                if (win) {
+                    this.visualize(" - the computer lost");
+                    $("#visualization").append("<br><h1>you win<h1>");
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    this.stickcount += computer;
+                    win = this.gameover();
+                    this.visualize(" - computer removed " + Math.abs(computer) + " sticks");
+                    if (win) {
+                        $("#visualization").append("<br><h1>you lose<h1>");
+                        setTimeout(() => {
+                            location.reload();
+                        }, 1000);
+                    }
+                }
+            }
+
+            gameover() {
+                return this.stickcount < 3;
+            }
+        }
+
+        $(document).ready(() => {
+            // === initialization of data =================
+            let myData = new Data();
+            myData.visualize();
+            // === setup UI ===============================
+            $("#remove_two").addClass("button").click(event => {
+                myData.add(-2);
+            });
+            $("#remove_three").addClass("button").click(event => {
+                myData.add(-3);
+            });
+            $(".button").mousedown(event => { // prevent selection
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Nim game - smads18</h1>
+    <button id="remove_two">Remove two sticks</button>
+    <button id="remove_three">Remove three sticks</button>
+    <p id="visualization"></p>
+</body>
+
+</html>
