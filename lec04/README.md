@@ -64,6 +64,7 @@ and returning the result as an object or string:
 
 Note: `await` is only allowed in `async` functions.
 
+In `exercise03-async.html`
 
 Exercise: REST
 --------------
@@ -79,5 +80,7 @@ Complete the code to
 
 Caveat: https://jsonplaceholder.typicode.com
 will return status codes but not actually perform the server changes.
+
+Can be found in `exercise04-rest.html`
 
 Bonus exercise for the brave: rewrite the code to use `async` and `await` instead.
