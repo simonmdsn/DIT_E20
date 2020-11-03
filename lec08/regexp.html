@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function validDate(input) {
+                "In words... I want a number with 2 digits between the values 0-9 and then a backslash and then the same and at last 4 digits with the values between 0-9"
+                const regex = new RegExp('[0-9]{1,2}(/)[0-9]{1,2}(/)[0-9]{4}');
+                if(input.match(regex)) {
+                    return true;
+                }
+                return false;
+                //FIXME: should return true on valid date strings on the format dd/mm/yyyy
+            }
+            window.addEventListener("load", () => {
+                let dateInput = document.getElementById("date");
+                dateInput.addEventListener("keyup", () => {
+                    if (validDate(dateInput.value)) {
+                        dateInput.style.background = "lightgreen";
+                    } else {
+                        dateInput.style.background = "red";
+                    }
+                });
+            })
+        </script>
+    </head>
+    <body>
+        <p>Please enter a date on the format dd/mm/yyyy:</p>
+        <form>
+            <label for="date">Date:</label>
+            <input type="text" id="date">
+        </form>
+    </body>
+</html>
